@@ -216,15 +216,39 @@ public class MainForm extends javax.swing.JFrame {
 
         x1MinField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         x1MinField.setText("-6");
+        x1MinField.setNextFocusableComponent(x1MaxField);
+        x1MinField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                x1MinFieldFocusGained(evt);
+            }
+        });
 
         x1MaxField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         x1MaxField.setText("6");
+        x1MaxField.setNextFocusableComponent(x2MinField);
+        x1MaxField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                x1MaxFieldFocusGained(evt);
+            }
+        });
 
         x2MinField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         x2MinField.setText("-6");
+        x2MinField.setNextFocusableComponent(x2MaxField);
+        x2MinField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                x2MinFieldFocusGained(evt);
+            }
+        });
 
         x2MaxField.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
         x2MaxField.setText("6");
+        x2MaxField.setNextFocusableComponent(ResolutionField);
+        x2MaxField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                x2MaxFieldFocusGained(evt);
+            }
+        });
 
         jLabel13.setText("Resolution:");
 
@@ -502,6 +526,22 @@ public class MainForm extends javax.swing.JFrame {
         this.viewBestValues();
         this.validate();
     }//GEN-LAST:event_MakeButtonActionPerformed
+
+    private void x1MinFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_x1MinFieldFocusGained
+        this.x1MinField.selectAll();
+    }//GEN-LAST:event_x1MinFieldFocusGained
+
+    private void x1MaxFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_x1MaxFieldFocusGained
+        this.x1MaxField.selectAll();
+    }//GEN-LAST:event_x1MaxFieldFocusGained
+
+    private void x2MinFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_x2MinFieldFocusGained
+        this.x2MinField.selectAll();
+    }//GEN-LAST:event_x2MinFieldFocusGained
+
+    private void x2MaxFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_x2MaxFieldFocusGained
+        this.x2MaxField.selectAll();
+    }//GEN-LAST:event_x2MaxFieldFocusGained
 
     private void viewBestValues(){
         

@@ -445,7 +445,13 @@
                   <Format subtype="0" type="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="-6"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="x1MaxField"/>
+                </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="x1MinFieldFocusGained"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="x1MaxField">
               <Properties>
@@ -453,7 +459,13 @@
                   <Format subtype="0" type="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="6"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="x2MinField"/>
+                </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="x1MaxFieldFocusGained"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="x2MinField">
               <Properties>
@@ -461,7 +473,13 @@
                   <Format subtype="0" type="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="-6"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="x2MaxField"/>
+                </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="x2MinFieldFocusGained"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="x2MaxField">
               <Properties>
@@ -469,7 +487,13 @@
                   <Format subtype="0" type="0"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="6"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="ResolutionField"/>
+                </Property>
               </Properties>
+              <Events>
+                <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="x2MaxFieldFocusGained"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel13">
               <Properties>
