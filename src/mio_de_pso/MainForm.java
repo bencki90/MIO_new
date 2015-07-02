@@ -549,8 +549,8 @@ public class MainForm extends javax.swing.JFrame {
             if(values[i] < minVal) minVal = values[i];
             if(values[i] > maxVal) maxVal = values[i];
         }
-        minVal *= 1.1;
-        maxVal *= 1.1;
+        minVal *= 1.2;
+        maxVal *= 1.2;
         
         LookupPaintScale ps = new LookupPaintScale(minVal, maxVal, Color.WHITE);
         
@@ -561,23 +561,24 @@ public class MainForm extends javax.swing.JFrame {
         
         int iterations = 60;
         int iterationPerColor = iterations / 3;
-        double resolution = Math.round(((maxVal - minVal) / iterations) * 100.0) / 100.0;
-        double val = minVal - resolution;
+        double res = Math.round(((maxVal - minVal) / iterations) * 100.0) / 100.0;
+        minVal -= res;
+        
         for (int i = 0; i < iterationPerColor; ++i)
         {
-            ps.add(minVal += resolution, new Color(startColor.getRed()   + (((secondColor.getRed()   - startColor.getRed())   * i) / iterationPerColor),
+            ps.add(minVal += res, new Color(startColor.getRed()   + (((secondColor.getRed()   - startColor.getRed())   * i) / iterationPerColor),
                     startColor.getGreen() + (((secondColor.getGreen()) - startColor.getGreen()) * i) / iterationPerColor,
                     startColor.getBlue()  + (((secondColor.getBlue()  - startColor.getBlue())  * i) / iterationPerColor)));
         }
         for (int i = 0; i < iterationPerColor; ++i)
         {
-            ps.add(minVal += resolution, new Color(secondColor.getRed()   + (((thirdColor.getRed()   - secondColor.getRed())   * i) / iterationPerColor),
+            ps.add(minVal += res, new Color(secondColor.getRed()   + (((thirdColor.getRed()   - secondColor.getRed())   * i) / iterationPerColor),
                     secondColor.getGreen() + (((thirdColor.getGreen()) - secondColor.getGreen()) * i) / iterationPerColor,
                     secondColor.getBlue()  + (((thirdColor.getBlue()  - secondColor.getBlue())  * i) / iterationPerColor)));
         }
         for (int i = 0; i < iterationPerColor; ++i)
         {
-            ps.add(minVal += resolution, new Color(thirdColor.getRed()   + (((endColor.getRed()   - thirdColor.getRed())   * i) / iterationPerColor),
+            ps.add(minVal += res, new Color(thirdColor.getRed()   + (((endColor.getRed()   - thirdColor.getRed())   * i) / iterationPerColor),
                     thirdColor.getGreen() + (((endColor.getGreen()) - thirdColor.getGreen()) * i) / iterationPerColor,
                     thirdColor.getBlue()  + (((endColor.getBlue()  - thirdColor.getBlue())  * i) / iterationPerColor)));
         }

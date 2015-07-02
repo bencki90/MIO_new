@@ -63,7 +63,7 @@ public class RPNEvaluator{
 		
 		for(int i = 0; i < equationElements.length; ++i){
 			
-			String currentElement = equationElements[i].toLowerCase();
+			String currentElement = equationElements[i].toLowerCase().replace(',', '.');
 			boolean isOperand = false;
 			
 			switch(currentElement){
