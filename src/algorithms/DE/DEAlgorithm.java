@@ -78,20 +78,14 @@ public class DEAlgorithm implements IEvolutionaryAlgorithm{
 			
 			for(String key : this.dimensions.keySet()){
 				if(random.nextInt(this.dimensions.size() + 1) == R || random.nextDouble() * 1 < this.CR) {
-					
-					individualCandidate.setPosition(key, this.population[a].getPosition(key) + this.F * (this.population[b].getPosition(key) - this.population[c].getPosition(key)));
+					double newPosition = this.population[a].getPosition(key) + this.F * (this.population[b].getPosition(key) - this.population[c].getPosition(key));
+                                        if(newPosition > this.dimensions.get(key).getMaxBoundary()) newPosition = this.dimensions.get(key).getMaxBoundary();
+                                        if(newPosition < this.dimensions.get(key).getMinBoundary()) newPosition = this.dimensions.get(key).getMinBoundary();
+                                        
+					individualCandidate.setPosition(key, newPosition);
 				}
 			}
                         
-                        boolean candidateInBoundaries = true;
-                        for(String key : dimensions.keySet()){
-                            if(individualCandidate.getPosition(key) > dimensions.get(key).getMaxBoundary() ||
-                                    individualCandidate.getPosition(key) < dimensions.get(key).getMinBoundary()){
-                                candidateInBoundaries = false;
-                                break;
-                            }
-                        }
-                        if(!candidateInBoundaries) continue;
                         
 			if(this.operation == Operation.Minimize){
 				if(this.fitnessFunction(this.population[x].getPosition()) > this.fitnessFunction(individualCandidate.getPosition())){
@@ -137,6 +131,7 @@ public class DEAlgorithm implements IEvolutionaryAlgorithm{
 		return this.fitnessFunction(this.bestPosition());
 	}
 	
+        @Override
 	public void printResults() throws Exception{
 		System.out.println("############ RESULT ############");
 		for(int i = 0; i < this.population.length; ++i){
@@ -147,6 +142,20 @@ public class DEAlgorithm implements IEvolutionaryAlgorithm{
 			}
 			System.out.println();
 		}
+	}
+        
+        @Override
+        public void printBestValue() throws Exception{
+		System.out.println("############ BEST ############");
+                
+                System.out.format("Best individual value: %f.6\n", this.getBestValue());
+                HashMap<String, Double> bestPositon = this.getBestPosition();
+
+                for(String key : bestPositon.keySet()){
+                        System.out.format(key + ": %f.6\t", bestPositon.get(key));
+                }
+                System.out.println();
+
 	}
 
 

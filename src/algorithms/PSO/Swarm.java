@@ -187,4 +187,30 @@ public class Swarm implements IEvolutionaryAlgorithm {
                 return null;
             }
 	}
+        
+        @Override
+        public void printResults() throws Exception{
+		System.out.println("############ RESULT ############");
+		for(int i = 0; i < this.particles.length; ++i){
+			System.out.print("Individual " + (i + 1) + ": ");
+
+			for(String key : this.particles[i].getPosition().keySet()){
+				System.out.format(key + ": %f.6\t", this.particles[i].getPosition(key));
+			}
+			System.out.println();
+		}
+	}
+        
+        @Override
+        public void printBestValue() throws Exception{
+		System.out.println("############ BEST ############");
+                
+                System.out.format("Best individual value: %f.6\n", this.getBestKnownValue());
+
+                for(String key : this.bestKnownPosition.keySet()){
+                        System.out.format(key + ": %f.6\t", this.bestKnownPosition.get(key));
+                }
+                System.out.println();
+
+	}
 }

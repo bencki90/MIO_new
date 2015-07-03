@@ -33,6 +33,11 @@ import org.jfree.data.xy.DefaultXYZDataset;
  */
 public class MainForm extends javax.swing.JFrame {
     
+    public double x1Min;
+    public double x1Max;
+    public double x2Min;
+    public double x2Max;
+    
     public String functionRPN;
     
     public IEvolutionaryAlgorithm DE;
@@ -418,10 +423,6 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ParseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ParseButtonActionPerformed
-        double x1Min;
-        double x1Max;
-        double x2Min;
-        double x2Max;
         int populationSize;
         double F;
         double CR;
@@ -573,9 +574,11 @@ public class MainForm extends javax.swing.JFrame {
     
     private void viewIndividuals(Individual[] population, XYPlot plot){
         
+        double annotationSize = (((x1Max - x1Min) * 0.02) + ((x2Max - x2Min) * 0.02)) / 2;
+        
         for(int i = 0; i < population.length; ++i){
             XYShapeAnnotation annotation = new XYShapeAnnotation(
-                new Ellipse2D.Double(population[i].getPosition("x1"), population[i].getPosition("x2"), resolution, resolution), new BasicStroke(1.0f), 
+                new Ellipse2D.Double(population[i].getPosition("x1"), population[i].getPosition("x2"), annotationSize, annotationSize), new BasicStroke(1.0f), 
                 Color.LIGHT_GRAY, Color.LIGHT_GRAY);
         
             plot.addAnnotation(annotation);
@@ -589,8 +592,7 @@ public class MainForm extends javax.swing.JFrame {
             if(values[i] < minVal) minVal = values[i];
             if(values[i] > maxVal) maxVal = values[i];
         }
-        minVal *= 1.2;
-        maxVal *= 1.2;
+
         
         LookupPaintScale ps = new LookupPaintScale(minVal, maxVal, Color.WHITE);
         

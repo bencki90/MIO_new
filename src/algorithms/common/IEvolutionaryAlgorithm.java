@@ -10,4 +10,6 @@ public interface IEvolutionaryAlgorithm {
 	public double getBestValue();
 	public HashMap<String, Double> getBestPosition();
         public DefaultXYZDataset getDataSet();
+        public void printResults() throws Exception;
+        public void printBestValue() throws Exception;
 }
