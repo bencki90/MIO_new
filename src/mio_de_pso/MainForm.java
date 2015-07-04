@@ -594,7 +594,7 @@ public class MainForm extends javax.swing.JFrame {
         }
 
         
-        LookupPaintScale ps = new LookupPaintScale(minVal, maxVal, Color.WHITE);
+        LookupPaintScale ps = new LookupPaintScale(minVal, maxVal + 0.0000001, Color.WHITE);
         
         Color startColor = Color.BLUE;
         Color secondColor = Color.GREEN;

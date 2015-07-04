@@ -11,9 +11,19 @@ public class ShuntingYard {
         final String ops = "-+/*^";
         StringBuilder sb = new StringBuilder();
         Stack<Integer> s = new Stack<>();
+        int inFunction = 0;
+        int brackets = 0;
  
         for (String token : infix.split("\\s")) {
             if (token.isEmpty()) continue;
+            
+            switch(token){
+                case "sin":
+                case "cos":
+                case "abs":
+                    ++inFunction;
+                    break;
+            }
             
             int idx = -1;
             
@@ -35,13 +45,20 @@ public class ShuntingYard {
                 }
             } 
             else if (c == '(') {
+                if(inFunction > 0) ++brackets;
                 s.push(-2); // -2 stands for '('
             } 
             else if (c == ')') {
                 // until '(' on stack, pop operators.
-                while (s.peek() != -2)
-                    sb.append(ops.charAt(s.pop())).append(' ');
+                while (s.peek() != -2) sb.append(ops.charAt(s.pop())).append(' ');
+                
                 s.pop();
+                if(inFunction > 0){
+                    if(inFunction == brackets--){
+                        sb.append("endfun ");
+                        --inFunction;
+                    }
+                }
             }
             else {
                 sb.append(token).append(' ');
