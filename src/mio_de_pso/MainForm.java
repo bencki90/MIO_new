@@ -137,7 +137,7 @@ public class MainForm extends javax.swing.JFrame {
         PSOPanel.setLayout(PSOPanelLayout);
         PSOPanelLayout.setHorizontalGroup(
             PSOPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 570, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         PSOPanelLayout.setVerticalGroup(
             PSOPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,7 +150,7 @@ public class MainForm extends javax.swing.JFrame {
         DEPanel.setLayout(DEPanelLayout);
         DEPanelLayout.setHorizontalGroup(
             DEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 375, Short.MAX_VALUE)
+            .addGap(0, 945, Short.MAX_VALUE)
         );
         DEPanelLayout.setVerticalGroup(
             DEPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -175,10 +175,10 @@ public class MainForm extends javax.swing.JFrame {
         PopulationField.setText("50");
 
         PSOC1Field.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        PSOC1Field.setText("2");
+        PSOC1Field.setText("0,05");
 
         PSOC2Field.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
-        PSOC2Field.setText("2");
+        PSOC2Field.setText("0,05");
 
         jLabel5.setText("C1:");
 
@@ -469,24 +469,23 @@ public class MainForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Błędne parametry optymalizacji stadnej cząsteczek");
             return;
         }
-        try{
-            this.functionRPN = ShuntingYard.infixToPostfix(this.funcField.getText());
-        }catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "Błąd podczas parsowania funkcji");
-            return;
-        }
-        
-        rangeAxis.setRange(x1Min, x1Max);
-        domainAxis.setRange(x2Min, x2Max);
-        
-        Renderer.setBlockHeight(resolution);
-        Renderer.setBlockWidth(resolution);
         
         double[][] data;
-        try {
+        try{
+            rangeAxis.setRange(x1Min, x1Max);
+            domainAxis.setRange(x2Min, x2Max);
+
+            Renderer.setBlockHeight(resolution);
+            Renderer.setBlockWidth(resolution);
+        
+            this.functionRPN = ShuntingYard.infixToPostfix(this.funcField.getText());
+
             data = this.getFunctionValues(x1Min, x1Max, x2Min, x2Max, resolution);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+            return;
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Błęd podczas tworzenia tablicy wartości!");
+            JOptionPane.showMessageDialog(this, "Błęd podczas tworzenia parsowania funkcji!\nWszystkie elementy równania muszą być oddzielone spacją.");
             return;
         }
         
@@ -596,13 +595,14 @@ public class MainForm extends javax.swing.JFrame {
         
         LookupPaintScale ps = new LookupPaintScale(minVal, maxVal + 0.0000001, Color.WHITE);
         
-        Color startColor = Color.BLUE;
-        Color secondColor = Color.GREEN;
-        Color thirdColor = Color.YELLOW;
+        Color startColor = Color.BLACK;
+        Color secondColor = Color.BLUE;
+        Color thirdColor = Color.GREEN;
+        Color fourthColor = Color.YELLOW;
         Color endColor = Color.RED;
         
-        int iterations = 60;
-        int iterationPerColor = iterations / 3;
+        int iterations = 80;
+        int iterationPerColor = iterations / 4;
         double res = Math.round(((maxVal - minVal) / iterations) * 100.0) / 100.0;
         minVal -= res;
         
@@ -620,9 +620,15 @@ public class MainForm extends javax.swing.JFrame {
         }
         for (int i = 0; i < iterationPerColor; ++i)
         {
-            ps.add(minVal += res, new Color(thirdColor.getRed()   + (((endColor.getRed()   - thirdColor.getRed())   * i) / iterationPerColor),
-                    thirdColor.getGreen() + (((endColor.getGreen()) - thirdColor.getGreen()) * i) / iterationPerColor,
-                    thirdColor.getBlue()  + (((endColor.getBlue()  - thirdColor.getBlue())  * i) / iterationPerColor)));
+            ps.add(minVal += res, new Color(thirdColor.getRed()   + (((fourthColor.getRed()   - thirdColor.getRed())   * i) / iterationPerColor),
+                    thirdColor.getGreen() + (((fourthColor.getGreen()) - thirdColor.getGreen()) * i) / iterationPerColor,
+                    thirdColor.getBlue()  + (((fourthColor.getBlue()  - thirdColor.getBlue())  * i) / iterationPerColor)));
+        }
+        for (int i = 0; i < iterationPerColor; ++i)
+        {
+            ps.add(minVal += res, new Color(fourthColor.getRed()   + (((endColor.getRed()   - fourthColor.getRed())   * i) / iterationPerColor),
+                    fourthColor.getGreen() + (((endColor.getGreen()) - fourthColor.getGreen()) * i) / iterationPerColor,
+                    fourthColor.getBlue()  + (((endColor.getBlue()  - fourthColor.getBlue())  * i) / iterationPerColor)));
         }
         return ps;
     }

@@ -76,7 +76,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="570" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -99,7 +99,7 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="375" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="945" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
@@ -346,7 +346,7 @@
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format subtype="0" type="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="2"/>
+                <Property name="text" type="java.lang.String" value="0,05"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="PSOC2Field">
@@ -354,7 +354,7 @@
                 <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
                   <Format subtype="0" type="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="2"/>
+                <Property name="text" type="java.lang.String" value="0,05"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">

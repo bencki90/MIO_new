@@ -1,6 +1,7 @@
 package functionParsing;
 
 import java.util.Stack;
+import org.apache.commons.lang3.math.NumberUtils;
  
 public class ShuntingYard {
  
@@ -16,6 +17,32 @@ public class ShuntingYard {
  
         for (String token : infix.split("\\s")) {
             if (token.isEmpty()) continue;
+            
+            switch(token.toLowerCase()){
+                case "sin":
+                case "cos":
+                case "abs":
+                case "x1":
+                case "x2":
+                case "e":
+                case "pi":
+                case "(":
+                case ")":
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                case "^":
+                    break;
+                default:
+                    if(!NumberUtils.isParsable(token.replace(',', '.'))) throw new IllegalArgumentException("Wszystkie elementy równania muszą być rodzielone spacją:"
+                            + "\n\t- funkcje: sin, cos, abs"
+                            + "\n\t- zmienne: x1, x2"
+                            + "\n\t- stałe"
+                            + "\n\t- operatory: +, -, *, /, ^"
+                            + "\n\t- nawiasy: ( )");
+                    break;
+            }
             
             switch(token){
                 case "sin":
